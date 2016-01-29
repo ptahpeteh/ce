@@ -58,6 +58,7 @@ extern ce_exception_ *ce_glob_;
 		if ((cc_ = setjmp(ce_glob_->env))) {	\
 			ce_glob_ = lce_.prev;				\
 			ce_finally_();						\
+			if (!ce_glob_) abort();				\
 			longjmp(ce_glob_->env, cc_);		\
 		} else {								\
 			ce_catch_(ec_);						\
