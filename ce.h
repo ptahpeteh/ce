@@ -8,13 +8,22 @@
 		...
 		if (some + thing - goes == wrong) THROW(-1);
 		...
+		this_can_throw_too();
+		...
 	}
 	CATCH (ex) {
-		// ex: exception code passed to THROW()
+		// ex: exception code passed to THROW(), int
 	}
 	FINALLY {
 		// this gets always executed after try/catch blocks
 	}
+
+	CATCH and FINALLY are obligatory after TRY. TRY blocks can be nested.
+
+	Throw value is an int error code other than 0. Passing 0 to THROW() or
+	throwing exception outside of any TRY block will abort().
+
+	Directive USE_EXCEPTIONS; has to be placed somewhere in the global scope.
 */
 #include <setjmp.h>
 #include <stdlib.h>
