@@ -24,12 +24,20 @@
 	throwing exception outside of any TRY block will abort().
 
 	Directive USE_EXCEPTIONS; has to be placed somewhere in the global scope.
+	Compile with -DCE_M for multithread support.
 */
 #include <setjmp.h>
 #include <stdlib.h>
 
 #ifndef __ce_h__
 #define __ce_h__
+
+/// multithread support
+#ifdef CE_M
+#define CE_TLS _Thread_local
+#else
+#define CE_TLS
+#endif
 
 /** holds info about an exception handler (linked list)
 */
@@ -39,10 +47,10 @@ typedef struct ce_exception__ {
 } ce_exception_;
 
 /// pointer to the current (most recent) exception handler
-extern ce_exception_ *ce_glob_;
+extern CE_TLS ce_exception_ *ce_glob_;
 
 /// should be placed spmewhere in the program, only once
-#define USE_EXCEPTIONS ce_exception_ *ce_glob_ = NULL
+#define USE_EXCEPTIONS CE_TLS ce_exception_ *ce_glob_ = NULL
 
 /// throws an exception of code e, e must no be 0
 #define THROW(e) if (ce_glob_ && e) longjmp(ce_glob_->env, e); else abort()
