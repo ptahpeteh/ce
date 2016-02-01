@@ -30,3 +30,5 @@ int main() {
   ...
 }
 ```
+## license
+The MIT
