@@ -30,5 +30,8 @@ int main() {
   ...
 }
 ```
+Compile with `-DCE_M` to add multithread support.
+## requirements
+gcc because of local functions. See https://gcc.gnu.org/onlinedocs/gcc/Nested-Functions.html
 ## license
 The MIT
