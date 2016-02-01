@@ -48,10 +48,10 @@ extern ce_exception_ *ce_glob_;
 #define THROW(e) if (ce_glob_ && e) longjmp(ce_glob_->env, e); else abort()
 
 /// begins try block
-#define TRY auto void ce_try_(void)
+#define TRY void ce_try_(void)
 
 /// begins catch block
-#define CATCH(e) auto void ce_catch_(int e)
+#define CATCH(e) void ce_catch_(int e)
 
 /// begins finally block
 #define FINALLY auto void ce_finally_(void); {	\
